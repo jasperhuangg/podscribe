@@ -7,9 +7,6 @@ import {
   statePropsMapperFactory
 } from "../../util/redux";
 import {AUTH_STATE, LOGIN_USER, LOGOUT_USER} from "../../util/redux/auth/types";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import {colors} from "../../config/colors";
-
 
 function Splash(props: any) {
 
@@ -21,12 +18,12 @@ function Splash(props: any) {
   }, [])
 
   return (
-    <View style={global.container_centered}>
-      <View style={global.container_inner_80}>
-        <StatusBar hidden/>
-        <Text style={[global.logo_text, global.text_black, global.text_xl]}>podscribe.</Text>
+      <View style={global.container_centered}>
+        <View style={global.container_inner_80}>
+          <StatusBar hidden/>
+          <Text style={[global.logo_text, global.text_black, global.text_xl]}>podscribe.</Text>
+        </View>
       </View>
-    </View>
   )
 }
 

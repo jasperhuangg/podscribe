@@ -41,4 +41,16 @@ export const global = StyleSheet.create({
   text_xs: {
     fontSize: 10,
   },
+
+  // ---- Fonts
+  lato: {
+    fontFamily: "lato"
+  },
+  playfair_display: {
+    fontFamily: "playfair-display"
+  },
+  playfair_display: {
+    fontFamily: "playfair-display-italic"
+  },
+
 })

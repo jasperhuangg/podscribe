@@ -6,7 +6,6 @@ import {global} from "../../shared/GlobalStyles";
 import * as React from "react";
 
 export function CurrentlyPlayingSection(props: {syncEvent: SyncEvent}) {
-  console.log(props.syncEvent)
   return (
     <View style={[playerStyles.container_current, {marginBottom: SCREEN_HEIGHT * 0.02}]}>
       <View style={[

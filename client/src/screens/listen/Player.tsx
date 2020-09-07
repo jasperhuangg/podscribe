@@ -18,7 +18,7 @@ import * as Progress from 'react-native-progress'
 import {SCREEN_WIDTH} from "../../util/Dimensions";
 import {colors} from "../../config/colors";
 import * as Haptics from 'expo-haptics';
-
+import {Spring, animated, interpolate} from "react-spring/renderprops"
 
 
 const SYNC_INTERVAL_MS = 20000
@@ -91,10 +91,18 @@ class Player extends React.Component<any, CreateState> {
     this.state.tabPressListener()
   }
 
+
+  // TODO: see here to finish animation: https://codesandbox.io/s/8ynxyowzk0?file=/src/TestAnimationRenderProps.js
   render()
   {
     return (
       <SafeAreaView style={global.container_centered}>
+        <Spring
+          native={true}
+          from={{
+            opacity: 0
+          }}
+          ></Spring>
         {this.state.loaded &&
         <View style={global.container_inner_80}>
           {this.state.syncEvent ?
@@ -149,6 +157,8 @@ class Player extends React.Component<any, CreateState> {
 
   async getPlayback() {
     const response = await SpotifySyncPlayback.get(this.props.tokens.accessToken)
+
+    console.log(">>>> Create.getPlayback", response)
 
     this.setState({
       loaded: true,
