@@ -95,6 +95,9 @@ class MainPlayer extends React.Component<any, CreateState> {
   }
 
   async getPlayback() {
+
+    // TODO: rewrite this with then/catch,
+    //       handle case where access token expires (need to refresh and reset access token)
     const response = await SpotifySyncPlayback.get(this.props.tokens.accessToken)
 
     console.log(">>>> Create.getPlayback", response)
