@@ -12,7 +12,6 @@ import {global} from "../../shared/GlobalStyles";
 import {SpotifySyncPlayback} from "../../util/SpotifySyncPlayback";
 import {SyncEvent} from "../../models/SyncEvent";
 import {NoPlaybackPrompt} from "./NoPlaybackPrompt";
-import * as Haptics from 'expo-haptics';
 import {PlayerWithPlayback} from "./PlayerWithPlayback";
 
 

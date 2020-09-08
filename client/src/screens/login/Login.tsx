@@ -1,5 +1,5 @@
 import * as React from "react"
-import {ActivityIndicator, Animated, StatusBar, StyleProp, Text, View, ViewStyle} from "react-native";
+import {ActivityIndicator, StatusBar, StyleProp, Text, View, ViewStyle} from "react-native";
 import {SpotifyAuthenticationHandler} from "../../util/SpotifyAuthenticationHandler";
 import {connect} from "react-redux"
 import {dispatchPropsMapperFactory, statePropsMapperFactory} from "../../util/redux";
@@ -27,16 +27,6 @@ function Login(props: any) {
     }],
     opacity: fadeRiseInProps.opacity
   }
-
-  // const fadeInAnim = React.useRef(new Animated.Value(0)).current
-  // const riseAnim = React.useRef(new Animated.Value(15)).current
-
-  // React.useEffect(() => {
-  //   // ---- Prompt Spotify login after 800ms
-  //   setTimeout(async () => {
-  //     await onLogin()
-  //   }, 600)
-  // }, [])
 
   const [isLoggingIn, setIsLoggingIn] = React.useState(false)
 

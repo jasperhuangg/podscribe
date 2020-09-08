@@ -1,12 +1,8 @@
 import React from 'react'
-import { store } from "./src/util/redux"
-import { Provider } from "react-redux"
+import {store} from "./src/util/redux"
+import {Provider} from "react-redux"
 import {NavigationContainer} from "@react-navigation/native"
-import {
-  createStackNavigator,
-  HeaderStyleInterpolators,
-  TransitionPresets,
-} from "@react-navigation/stack"
+import {createStackNavigator} from "@react-navigation/stack"
 import Splash from "./src/screens/splash/Splash"
 import Login from "./src/screens/login/Login"
 import Main from "./src/screens/Main";
