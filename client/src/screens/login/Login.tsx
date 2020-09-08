@@ -1,13 +1,14 @@
 import * as React from "react"
-import {ActivityIndicator, Animated, StatusBar, Text, View} from "react-native";
+import {ActivityIndicator, Animated, StatusBar, StyleProp, Text, View, ViewStyle} from "react-native";
 import {SpotifyAuthenticationHandler} from "../../util/SpotifyAuthenticationHandler";
 import {connect} from "react-redux"
 import {dispatchPropsMapperFactory, statePropsMapperFactory} from "../../util/redux";
 import {AUTH_STATE, LOGIN_USER, LOGOUT_USER} from "../../util/redux/auth/types";
 import {global} from "../../shared/GlobalStyles";
 import {animated, useSpring} from 'react-spring/native'
+import Button from "../../shared/Button";
 
-const AnimatedText = animated(Text)
+const AnimatedView = animated(View)
 
 function Login(props: any) {
 
@@ -30,12 +31,12 @@ function Login(props: any) {
   // const fadeInAnim = React.useRef(new Animated.Value(0)).current
   // const riseAnim = React.useRef(new Animated.Value(15)).current
 
-  React.useEffect(() => {
-    // ---- Prompt Spotify login after 800ms
-    setTimeout(async () => {
-      await onLogin()
-    }, 800)
-  }, [])
+  // React.useEffect(() => {
+  //   // ---- Prompt Spotify login after 800ms
+  //   setTimeout(async () => {
+  //     await onLogin()
+  //   }, 600)
+  // }, [])
 
   const [isLoggingIn, setIsLoggingIn] = React.useState(false)
 
@@ -63,12 +64,22 @@ function Login(props: any) {
       {isLoggingIn ?
         <ActivityIndicator/> :
         <View style={global.container_inner_80}>
-          <AnimatedText
-            style={[
-              global.text_xl,
-              global.text_black, {fontWeight: "900",},
-              fadeInRiseStyle
-              ]}>logging in...</AnimatedText>
+          <AnimatedView style={fadeInRiseStyle as StyleProp<ViewStyle>} >
+            <Text
+              style={[
+                global.text_xl,
+                global.text_black, {fontWeight: "900"},
+              ]}>
+              login.
+            </Text>
+            <View style={{padding: 40}}/>
+            <Button
+              onPress={onLogin}
+              title={"TO SPOTIFY"}
+              width={"fill"}
+              letterSpacing={4}
+              />
+          </AnimatedView>
         </View>
       }
     </View>

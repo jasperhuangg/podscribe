@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {
-  ActivityIndicator, AppState, AppStateStatus,
+  ActivityIndicator, Animated, AppState, AppStateStatus,
   SafeAreaView,
   View,
 } from "react-native"
@@ -32,6 +32,7 @@ type CreateState = {
   tabPressListener: any
 }
 
+const AnimatedView = animated(View)
 
 class Player extends React.Component<any, CreateState> {
 
@@ -97,56 +98,78 @@ class Player extends React.Component<any, CreateState> {
   {
     return (
       <SafeAreaView style={global.container_centered}>
-        <Spring
-          native={true}
-          from={{
-            opacity: 0
-          }}
-          ></Spring>
-        {this.state.loaded &&
-        <View style={global.container_inner_80}>
-          {this.state.syncEvent ?
-            <>
-              <CurrentlyPlayingSection
-                syncEvent={this.state.syncEvent}
-              />
-              <Progress.Bar
-                progress={this.state.syncEvent.progress / this.state.syncEvent.length}
-                width={SCREEN_WIDTH * 0.8}
-                color={colors.black}
-              />
-              <PlaybackControls
-                accessToken={this.props.tokens.accessToken}
-                isPlaying={this.state.syncEvent.isPlaying}
-                onPause={() => {
-                  SpotifySyncPlayback.pause(this.props.tokens.accessToken)
-                  this.setState({syncEvent: this.state.syncEvent!.cloneTogglePlayback()})
-                }}
-                onPlay={() => {
-                  SpotifySyncPlayback.play(this.props.tokens.accessToken)
-                  this.setState({syncEvent: this.state.syncEvent!.cloneTogglePlayback()})
-                }}
-                onSkipBack={() => {
-                  SpotifySyncPlayback.skip30(this.props.tokens.accessToken, false)
-                  this.setState({syncEvent: this.state.syncEvent!.cloneSkipBackward()})
-                }}
-                onSkipAhead={() => {
-                  SpotifySyncPlayback.skip30(this.props.tokens.accessToken, true)
-                  this.setState({syncEvent: this.state.syncEvent!.cloneSkipAhead()})
-                }}
-              />
-              <Button title={"+ MAKE A NOTE"}
-                      onPress={() => alert("+ MAKE A NOTE")}
-                      width={"fill"}
-                      letterSpacing={4}
-                      fontSize={15}
-                      padding={11}
-              />
-            </> :
-            <NoPlaybackPrompt />
-          }
-        </View>
-        }
+            {this.state.loaded &&
+            <Spring
+              native={true}
+              from={{
+                o: 0,
+                t: [{
+                  translateY: -20
+                }]
+              }}
+              to={{
+                o: 1,
+                t: [{
+                  translateY: 0
+                }]
+              }}
+            >
+              {({ o, t }) => (
+              <AnimatedView
+                style={[
+                  global.container_inner_80,
+                  {
+                    opacity: interpolate(
+                      [o],
+                      o => 1
+                    )
+                  }
+                ]}
+              >
+
+                {this.state.syncEvent ?
+                  <>
+                    <CurrentlyPlayingSection
+                      syncEvent={this.state.syncEvent}
+                    />
+                    <Progress.Bar
+                      progress={this.state.syncEvent.progress / this.state.syncEvent.length}
+                      width={SCREEN_WIDTH * 0.8}
+                      color={colors.black}
+                    />
+                    <PlaybackControls
+                      accessToken={this.props.tokens.accessToken}
+                      isPlaying={this.state.syncEvent.isPlaying}
+                      onPause={() => {
+                        SpotifySyncPlayback.pause(this.props.tokens.accessToken)
+                        this.setState({syncEvent: this.state.syncEvent!.cloneTogglePlayback()})
+                      }}
+                      onPlay={() => {
+                        SpotifySyncPlayback.play(this.props.tokens.accessToken)
+                        this.setState({syncEvent: this.state.syncEvent!.cloneTogglePlayback()})
+                      }}
+                      onSkipBack={() => {
+                        SpotifySyncPlayback.skip30(this.props.tokens.accessToken, false)
+                        this.setState({syncEvent: this.state.syncEvent!.cloneSkipBackward()})
+                      }}
+                      onSkipAhead={() => {
+                        SpotifySyncPlayback.skip30(this.props.tokens.accessToken, true)
+                        this.setState({syncEvent: this.state.syncEvent!.cloneSkipAhead()})
+                      }}
+                    />
+                    <Button title={"+ MAKE A NOTE"}
+                            onPress={() => alert("+ MAKE A NOTE")}
+                            width={"fill"}
+                            letterSpacing={4}
+                            fontSize={15}
+                            padding={11}
+                    />
+                  </> :
+                  <NoPlaybackPrompt />
+                }
+              </AnimatedView>
+            )}
+            </Spring>}
         {
           !this.state.loaded &&
           <ActivityIndicator size={"small"}/>
