@@ -5,6 +5,7 @@ import MainPlayer from "./listen/MainPlayer";
 import {colors} from "../config/colors";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {StatusBar} from "react-native";
+import {ListenStack} from "./listen/ListenStack";
 
 const Tab = createBottomTabNavigator()
 
@@ -13,7 +14,7 @@ export default (props: any) =>
     <StatusBar barStyle={"dark-content"} />
 
     <Tab.Navigator
-      initialRouteName={"Player"}
+      initialRouteName={"Listen"}
       lazy={true}
       tabBarOptions={{
         activeBackgroundColor: colors.black,
@@ -45,8 +46,8 @@ export default (props: any) =>
       />
 
       <Tab.Screen
-        name={"Player"}
-        component={MainPlayer}
+        name={"Listen"}
+        component={ListenStack}
         options={{
           tabBarLabel: "",
           tabBarIcon: ({color, size}) => (

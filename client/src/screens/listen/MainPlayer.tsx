@@ -24,7 +24,6 @@ type CreateState = {
   interval: NodeJS.Timeout|null
   onBlur: any
   appState: string
-  tabPressListener: any
 }
 
 class MainPlayer extends React.Component<any, CreateState> {
@@ -37,18 +36,11 @@ class MainPlayer extends React.Component<any, CreateState> {
       interval: null,
       onBlur: null,
       appState: "active",
-      tabPressListener: null
     }
   }
 
   async componentDidMount() {
     AppState.addEventListener("change", this._handleAppStateChange);
-
-    const tabPressListener = this.props.navigation.addListener('tabPress', async () => {
-      await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
-    });
-
-    this.setState({tabPressListener: tabPressListener})
 
     this.props.navigation.addListener('focus', async () => {
       await this.getPlayback()
@@ -82,7 +74,6 @@ class MainPlayer extends React.Component<any, CreateState> {
     console.log(">>>> Create componentWillUnmount")
     clearTimeout(this.state.interval!)
     AppState.removeEventListener("change", this._handleAppStateChange)
-    this.state.tabPressListener()
   }
 
   render()

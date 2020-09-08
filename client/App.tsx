@@ -10,8 +10,6 @@ import {
 import Splash from "./src/screens/splash/Splash"
 import Login from "./src/screens/login/Login"
 import Main from "./src/screens/Main";
-import * as Font from 'expo-font';
-import { AppLoading } from 'expo';
 
 export default function App() {
 
@@ -21,7 +19,6 @@ export default function App() {
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator
-            lazy
             initialRouteName="Splash"
             screenOptions={{
               headerShown: false,
@@ -42,7 +39,6 @@ export default function App() {
                 },
               }),
             }}
-            mode="modal"
           >
             <Stack.Screen
               name="Splash"
