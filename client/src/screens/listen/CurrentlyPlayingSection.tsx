@@ -1,9 +1,9 @@
+import * as React from "react";
 import {SyncEvent} from "../../models/SyncEvent";
 import {Image, Text, View} from "react-native";
 import {playerStyles} from "./PlayerStyles";
 import {SCREEN_HEIGHT, SCREEN_WIDTH} from "../../util/Dimensions";
 import {global} from "../../shared/GlobalStyles";
-import * as React from "react";
 
 export function CurrentlyPlayingSection(props: {syncEvent: SyncEvent}) {
   return (

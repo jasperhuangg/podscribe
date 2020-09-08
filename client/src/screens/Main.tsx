@@ -1,7 +1,7 @@
 import * as React from "react"
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import Notebooks from "./notebooks/Collections";
-import Player from "./listen/Player";
+import MainPlayer from "./listen/MainPlayer";
 import {colors} from "../config/colors";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {StatusBar} from "react-native";
@@ -46,7 +46,7 @@ export default (props: any) =>
 
       <Tab.Screen
         name={"Player"}
-        component={Player}
+        component={MainPlayer}
         options={{
           tabBarLabel: "",
           tabBarIcon: ({color, size}) => (

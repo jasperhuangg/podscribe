@@ -6,28 +6,25 @@ import * as Linking from "expo-linking";
 import * as React from "react";
 
 
-export function NoInternetPrompt() {
-  return (
-    <SafeAreaView style={global.container_centered}>
-      <View style={{
-        height: SCREEN_HEIGHT,
-        display: "flex",
+export const NoInternetPrompt = () =>
+  <SafeAreaView style={global.container_centered}>
+    <View style={{
+      height: SCREEN_HEIGHT,
+      display: "flex",
 
-        justifyContent: "center",
-      }}>
-        <Text
-          style={[
-            global.text_lg,
-            global.text_black,
-            {
-              fontWeight: "900",
-              marginBottom: 40,
-            }
-          ]}
-        >
-          you need an internet connection to use podscribe.
-        </Text>
-      </View>
-    </SafeAreaView>
-  )
-}
+      justifyContent: "center",
+    }}>
+      <Text
+        style={[
+          global.text_lg,
+          global.text_black,
+          {
+            fontWeight: "900",
+            marginBottom: 40,
+          }
+        ]}
+      >
+        you need an internet connection to use podscribe.
+      </Text>
+    </View>
+  </SafeAreaView>
