@@ -15,6 +15,7 @@ export class SpotifySyncPlayback {
     const _episode = response.data.item
     const _type = response.data.currently_playing_type
     const _progress = response.data.progress_ms
+    const _device_id = response.data.device ? response.data.device.id : null
 
     return _episode && _type === "episode" ?
       new SyncEvent(
@@ -24,7 +25,8 @@ export class SpotifySyncPlayback {
         _episode.show.images[0].url,
         _progress,
         _isPlaying,
-        _episode.duration_ms
+        _episode.duration_ms,
+        _device_id
         ) :
       null
   }
@@ -32,7 +34,7 @@ export class SpotifySyncPlayback {
   static skip30(accessToken: string, forward: boolean) {
     const headers = {Authorization: "Bearer " + accessToken}
 
-    axios.get(SPOTIFY_API_URLS.currentPlayback, {headers: headers})
+    return axios.get(SPOTIFY_API_URLS.currentPlayback, {headers: headers})
       .then(response => {
         const _progress = response.data.progress_ms
         const _length = response.data.item.duration_ms
@@ -40,9 +42,7 @@ export class SpotifySyncPlayback {
           Math.min(_progress + 30 * SECOND_MS, _length) :
           Math.max(_progress - 30 * SECOND_MS, 0)
 
-        console.log(_progress, _length, _skipped)
-
-        axios.put(
+        return axios.put(
           SPOTIFY_API_URLS.seekPlayback(_skipped),
           {},
           {headers: headers}
@@ -59,42 +59,39 @@ export class SpotifySyncPlayback {
       .catch(e => console.error(e))
   }
 
+  static seekToAndPlay(accessToken: string, ms: number) {
+
+  }
+
   static pause(accessToken: string) {
     const headers = {Authorization: "Bearer " + accessToken}
     return axios.put(SPOTIFY_API_URLS.pausePlayback, {},{headers: headers})
   }
 
-  // TODO: instead of just resuming playback, use stored spotify_uri/timestamp for podcast to resume playback
-  static play(accessToken: string, lastSeenPlaybackId: string) {
-
-    console.log(">>>>", lastSeenPlaybackId)
-
+  static mutePlayback(accessToken: string) {
     const headers = {Authorization: "Bearer " + accessToken}
-    const body = {
-      uris: ["spotify:episode:" + lastSeenPlaybackId]
-    }
 
-    return axios.put(SPOTIFY_API_URLS.resumePlayback, {},{headers: headers})
-      .catch(_ => {
-        console.log("Spotify Playback error, trying with spotify_uri")
-        axios.put(SPOTIFY_API_URLS.resumePlayback, body,{headers: headers})
-      })
+    return axios.put(SPOTIFY_API_URLS.mutePlayback, {}, {headers: headers})
   }
 
-  static pauseAtPosition(accessToken: string) {
+  static getDevices(accessToken: string) {
     const headers = {Authorization: "Bearer " + accessToken}
 
-
+    axios.get(SPOTIFY_API_URLS.devices, {headers: headers})
+      .then(response => console.log(response.data))
   }
 
-  static playAtPosition(accessToken: string, episodeUri: string, ms: number) {
+  static play(accessToken: string, syncEvent: SyncEvent) {
     const headers = {Authorization: "Bearer " + accessToken}
-    const body = {
-      uris: [episodeUri],
-      position_ms: ms
+    const resumePlaybackBody = {
+      uris: ["spotify:episode:" + syncEvent.id]
     }
 
-    axios.put(SPOTIFY_API_URLS.resumePlayback, body, {headers: headers})
-      .then(response => console.log("++++ SpotifySyncPlayback.playAtPosition", response.data))
+    return axios.put(SPOTIFY_API_URLS.resumePlayback(null), {},{headers: headers})
+      .catch(e => {
+        console.log(">>>> Spotify resume playback error, trying with spotify_uri...", e)
+          return axios.put(SPOTIFY_API_URLS.resumePlayback(syncEvent.deviceId), resumePlaybackBody,{headers: headers})
+            .catch(e => console.error(e))
+          })
   }
 }

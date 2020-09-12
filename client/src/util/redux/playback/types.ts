@@ -10,7 +10,7 @@ export interface PlaybackState {
 
 interface PlaybackStateAction {
   type: typeof SET_PLAYBACK_STATE
-  payload: SyncEvent
+  payload: SyncEvent|null
 }
 
 

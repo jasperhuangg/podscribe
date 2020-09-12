@@ -58,7 +58,7 @@ export const dispatchPropsMapperFactory = (actions: string[]) =>
         }:
         {}),
       ...(actions.includes(SET_PLAYBACK_STATE) ?
-        {setPlaybackState: (syncEvent: SyncEvent) => {dispatch(setPlaybackState(syncEvent))}
+        {setPlaybackState: (syncEvent: SyncEvent | null) => {dispatch(setPlaybackState(syncEvent))}
         }:
         {}),
     }

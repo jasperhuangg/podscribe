@@ -18,119 +18,91 @@ import {PLAYBACK_STATE, SET_PLAYBACK_STATE} from "../../util/redux/playback/type
 
 const SYNC_INTERVAL_MS = 20000
 
-type ListenState = {
-  loaded: boolean
-  interval: NodeJS.Timeout|null
-  onBlur: any
-  appState: string
-}
+const Listen = (props: any) => {
 
-class Listen extends React.Component<any, ListenState> {
+  const [loaded, setLoaded] = React.useState(false)
+  const [syncInterval, setSyncInterval] = React.useState<any>(null)
+  const [onBlur, setOnBlur] = React.useState(null)
+  const [appState, setAppState] = React.useState("active")
 
-  constructor(props: any) {
-    super(props)
-    this.state = {
-      loaded: false,
-      interval: null,
-      onBlur: null,
-      appState: "active",
+
+  React.useEffect(() => {
+
+    const _handleAppStateChange = async (nextAppState: AppStateStatus) => {
+      console.log("AppState changed", appState, nextAppState)
+      if (
+        nextAppState === "active"
+      ) {
+        await getPlayback()
+      }
+
+      setAppState(nextAppState)
     }
-  }
 
-  async componentDidMount() {
-    AppState.addEventListener("change", this._handleAppStateChange);
+    AppState.addEventListener("change", _handleAppStateChange);
 
-    this.props.navigation.addListener('focus', async () => {
-      await this.getPlayback()
-      const interval = setInterval(async () => await this.getPlayback(), SYNC_INTERVAL_MS)
-      this.setState({interval: interval})
+    props.navigation.addListener('focus', async () => {
+      console.log(">>>> Listen focus event")
+      await getPlayback()
+      const syncInterval = setInterval(async () => await getPlayback(), SYNC_INTERVAL_MS)
+      setSyncInterval(syncInterval)
     })
 
-    this.props.navigation.addListener('blur', () => {
+    props.navigation.addListener('blur', () => {
       console.log(">>>> Listen blur event")
-      clearTimeout(this.state.interval!)
+      clearTimeout(syncInterval!)
     })
-  }
 
-  // shouldComponentUpdate(nextProps: Readonly<any>, nextState: Readonly<ListenState>): boolean {
-  //   const currSync = this.state.syncEvent
-  //   const nextSync = nextState.syncEvent
-  //
-  //   return (
-  //     (!this.state.loaded && nextState.loaded) ||
-  //     (!currSync && !!nextSync) ||
-  //     (!!currSync && !nextSync) ||
-  //     (!!currSync && !!nextSync && (
-  //         currSync.id !== nextSync.id ||                // podcast changed
-  //         currSync.isPlaying !== nextSync.isPlaying ||  // playback status changed
-  //         currSync.progress !== nextSync.progress       // progress changed
-  //     ))
-  //   )
-  // }
+    return () => {
+      console.log(">>>> Listen componentWillUnmount")
+      clearTimeout(syncInterval!)
+      AppState.removeEventListener("change", _handleAppStateChange)
+    }
+  }, [])
 
-  componentWillUnmount() {
-    console.log(">>>> Listen componentWillUnmount")
-    clearTimeout(this.state.interval!)
-    AppState.removeEventListener("change", this._handleAppStateChange)
-  }
 
-  render()
-  {
-    return (
-      <SafeAreaView style={global.container_centered}>
-        {this.state.loaded ?
-          (this.props.syncEvent ?
-            <Player
-              accessToken={this.props.tokens.accessToken}
-              navigation={this.props.navigation}
-            /> :
-            <NoPlaybackPrompt/>
-          ) :
-          <ActivityIndicator size={"small"}/>
-        }
-      </SafeAreaView>
-    )
-  }
 
-  async getPlayback() {
+  return (
+    <SafeAreaView style={global.container_centered}>
+      {loaded ?
+        (props.syncEvent && props.syncEvent.deviceId ?
+          <Player
+            accessToken={props.tokens.accessToken}
+            navigation={props.navigation}
+          /> :
+          <NoPlaybackPrompt/>
+        ) :
+        <ActivityIndicator size={"small"}/>
+      }
+    </SafeAreaView>
+  )
 
+  async function getPlayback() {
     // TODO: rewrite this with then/catch,
     //       handle case where access token expires (need to refresh and reset access token)
-    const response = await SpotifySyncPlayback.get(this.props.tokens.accessToken)
+    const response = await SpotifySyncPlayback.get(props.tokens.accessToken)
 
     console.log(">>>> Listen.getPlayback", response)
 
-    this.setState({
-      loaded: true,
-    })
+    setLoaded(true)
 
-    this.updatePlayback(response)
+    updatePlayback(response)
   }
 
-  updatePlayback(nextSync: SyncEvent | null) {
-    const currSync = this.props.syncEvent
+  function updatePlayback(nextSync: SyncEvent | null) {
+    const currSync = props.syncEvent
 
     if(
-      (!currSync && !!nextSync) ||
+      (!currSync && !!nextSync && nextSync.deviceId) ||
       (!!currSync && !nextSync) ||
-      (!!currSync && !!nextSync && (
+      (!!currSync && !!nextSync && nextSync.deviceId && (
         currSync.id !== nextSync.id ||                // podcast changed
         currSync.isPlaying !== nextSync.isPlaying ||  // playback status changed
         currSync.progress !== nextSync.progress       // progress changed
       ))
     )
-      this.props.setPlaybackState(nextSync)
+      props.setPlaybackState(nextSync)
   }
-
-   _handleAppStateChange = async (nextAppState: AppStateStatus) => {
-    if (
-      this.state.appState.match(/inactive|background/) &&
-      nextAppState === "active"
-    )
-      await this.getPlayback()
-
-    this.setState({appState: nextAppState})
-  };
 }
 
 const mapStateToProps = statePropsMapperFactory([AUTH_STATE, PLAYBACK_STATE])

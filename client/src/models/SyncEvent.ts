@@ -8,7 +8,8 @@ export class SyncEvent {
               readonly imageUrl: string,
               readonly progress: number,
               readonly isPlaying: boolean,
-              readonly length: number
+              readonly length: number,
+              readonly deviceId: string|null,
 ) {}
   cloneTogglePlay(): SyncEvent {
     return new SyncEvent(
@@ -18,7 +19,8 @@ export class SyncEvent {
       this.imageUrl,
       this.progress,
       true,
-      this.length
+      this.length,
+      this.deviceId
     )
   }
 
@@ -30,7 +32,8 @@ export class SyncEvent {
       this.imageUrl,
       this.progress,
       false,
-      this.length
+      this.length,
+      this.deviceId
     )
   }
 
@@ -42,7 +45,8 @@ export class SyncEvent {
       this.imageUrl,
       Math.min(this.progress + 30 * SECOND_MS, this.length),
       this.isPlaying,
-      this.length
+      this.length,
+      this.deviceId
     )
   }
 
@@ -54,7 +58,8 @@ export class SyncEvent {
       this.imageUrl,
       Math.max(this.progress - 30 * SECOND_MS, 0),
       this.isPlaying,
-      this.length
+      this.length,
+      this.deviceId
     )
   }
 }

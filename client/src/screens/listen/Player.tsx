@@ -31,17 +31,18 @@ const Player = (props: any) =>
           .catch(e => console.error(e))
       }}
       onPlay={() => {
-        SpotifySyncPlayback.play(props.accessToken, props.syncEvent.id)
+        SpotifySyncPlayback.play(props.accessToken, props.syncEvent)
           .then(_ => props.setPlaybackState(props.syncEvent!.cloneTogglePlay()))
           .catch(e => console.log(e))
       }}
       onSkipBack={() => {
         SpotifySyncPlayback.skip30(props.accessToken, false)
-        props.setPlaybackState(props.syncEvent!.cloneSkipBackward())
+          .then(() => props.setPlaybackState(props.syncEvent!.cloneSkipBackward())
+          )
       }}
       onSkipAhead={() => {
         SpotifySyncPlayback.skip30(props.accessToken, true)
-        props.setPlaybackState(props.syncEvent!.cloneSkipAhead())
+          .then(() => props.setPlaybackState(props.syncEvent!.cloneSkipAhead()))
       }}
     />
     <Button title={"+ MAKE A NOTE"}

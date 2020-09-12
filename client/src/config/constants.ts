@@ -18,7 +18,11 @@ export const SPOTIFY_API_URLS = {
   currentPlayback: "https://api.spotify.com/v1/me/player?additional_types=episode",
   seekPlayback: (ms: number) => "https://api.spotify.com/v1/me/player/seek?position_ms=" + ms,
   pausePlayback: "https://api.spotify.com/v1/me/player/pause",
-  resumePlayback: "https://api.spotify.com/v1/me/player/play"
+  resumePlayback: (deviceId: string|null) =>
+    "https://api.spotify.com/v1/me/player/play" + (deviceId ? "?device_id=" + deviceId : ""),
+  devices: "https://api.spotify.com/v1/me/player/devices",
+  transferPlayback: "https://api.spotify.com/v1/me/player",
+  mutePlayback: "https://api.spotify.com/v1/me/player/volume?volume_percent=0"
 }
 
 const STORAGE_PREFIX = "@PodcastCompanion:"

@@ -1,11 +1,14 @@
 import * as React from 'react'
-import {SafeAreaView, Text, View} from "react-native";
+import {SafeAreaView, Text, TouchableOpacity, View} from "react-native";
 import {dispatchPropsMapperFactory, statePropsMapperFactory} from "../../util/redux";
 import {AUTH_STATE} from "../../util/redux/auth/types";
 import {connect} from "react-redux";
 import {SpotifySyncPlayback} from "../../util/SpotifySyncPlayback";
 import {newNoteStyles} from "./NewNoteStyles";
 import {PLAYBACK_STATE, SET_PLAYBACK_STATE} from "../../util/redux/playback/types";
+import {SyncEvent} from "../../models/SyncEvent";
+import { Ionicons } from '@expo/vector-icons';
+import {colors} from "../../config/colors";
 
 export enum NOTE_TYPES {
   DEFINITION,
@@ -13,20 +16,33 @@ export enum NOTE_TYPES {
   TEXT
 }
 
+// TODO: Let's rewrite with react-native-modal
+
 const NewNote = (props: any) => {
-  const [noteType, setNoteType] = React.useState(null)
+  const [noteType, setNoteType] = React.useState<string|null>(null)
+  const [currentPlayback, setCurrentPlayback] = React.useState<SyncEvent|null>(null)
 
-  React.useEffect(() => {
-    SpotifySyncPlayback.pause(props.tokens.accessToken)
-
-    return () => {
-      SpotifySyncPlayback.play(props.tokens.accessToken)
-      props.setPlaybackState(props.syncEvent.cloneTogglePlayback())
-    }
-  }, [])
+  // React.useEffect(() => {
+  //   SpotifySyncPlayback.pause(props.tokens.accessToken)
+  //     .then(_ => props.setPlaybackState(props.syncEvent.cloneTogglePause()))
+  //
+  //   return () => {
+  //     console.log(">>>> NewNote unmounting", props.syncEvent)
+  //     SpotifySyncPlayback.play(props.tokens.accessToken, props.syncEvent)
+  //       .then(_ => props.setPlaybackState(props.syncEvent.cloneTogglePlay()))
+  //   }
+  // }, [])
 
   return (
-    <SafeAreaView>
+    <SafeAreaView
+      style={newNoteStyles.container}
+    >
+      <TouchableOpacity
+        style={newNoteStyles.modalBar}
+        onPress={() => props.navigation.navigate("Listen")}
+      >
+        <Ionicons name="ios-arrow-down" size={30} color={colors.black} />
+      </TouchableOpacity>
     {!noteType ?
       <NoteTypeModal/> :
       <NoteEditor type={noteType!}/>
@@ -42,7 +58,7 @@ export const NoteTypeModal = (props: {}) =>
     </Text>
   </View>
 
-export const NoteEditor = (props: {type: NOTE_TYPES}) =>
+export const NoteEditor = (props: {type: string}) =>
   <View>
 
   </View>
