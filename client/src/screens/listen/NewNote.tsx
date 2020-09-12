@@ -16,7 +16,7 @@ export enum NOTE_TYPES {
   TEXT
 }
 
-// TODO: Let's rewrite with react-native-modal
+// TODO: Let's rewrite with react-native-modal (https://www.npmjs.com/package/react-native-modal)
 
 const NewNote = (props: any) => {
   const [noteType, setNoteType] = React.useState<string|null>(null)
