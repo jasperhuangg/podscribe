@@ -1,5 +1,4 @@
 import * as React from "react";
-import {SyncEvent} from "../../models/SyncEvent";
 import {View} from "react-native";
 import {global} from "../../shared/GlobalStyles";
 import {CurrentlyPlayingSection} from "./CurrentlyPlayingSection";
@@ -9,12 +8,11 @@ import {PlaybackControls} from "./PlaybackControls";
 import {SpotifySyncPlayback} from "../../util/SpotifySyncPlayback";
 import Button from "../../shared/Button";
 import * as Progress from "react-native-progress";
+import {dispatchPropsMapperFactory, statePropsMapperFactory} from "../../util/redux";
+import {PLAYBACK_STATE, SET_PLAYBACK_STATE} from "../../util/redux/playback/types";
+import {connect} from "react-redux";
 
-export const PlayerWithPlayback = (props: {
-  syncEvent: SyncEvent
-  accessToken: string
-  setSyncEvent: (syncEvent: SyncEvent) => void
-}) =>
+const Player = (props: any) =>
   <View style={global.container_inner_80}>
     <CurrentlyPlayingSection
       syncEvent={props.syncEvent}
@@ -29,26 +27,33 @@ export const PlayerWithPlayback = (props: {
       isPlaying={props.syncEvent.isPlaying}
       onPause={() => {
         SpotifySyncPlayback.pause(props.accessToken)
-        props.setSyncEvent(props.syncEvent!.cloneTogglePlayback())
+          .then(_ => props.setPlaybackState(props.syncEvent!.cloneTogglePause()))
+          .catch(e => console.error(e))
       }}
       onPlay={() => {
-        SpotifySyncPlayback.play(props.accessToken)
-        props.setSyncEvent(props.syncEvent!.cloneTogglePlayback())
+        SpotifySyncPlayback.play(props.accessToken, props.syncEvent.id)
+          .then(_ => props.setPlaybackState(props.syncEvent!.cloneTogglePlay()))
+          .catch(e => console.log(e))
       }}
       onSkipBack={() => {
         SpotifySyncPlayback.skip30(props.accessToken, false)
-        props.setSyncEvent(props.syncEvent!.cloneSkipBackward())
+        props.setPlaybackState(props.syncEvent!.cloneSkipBackward())
       }}
       onSkipAhead={() => {
         SpotifySyncPlayback.skip30(props.accessToken, true)
-        props.setSyncEvent(props.syncEvent!.cloneSkipAhead())
+        props.setPlaybackState(props.syncEvent!.cloneSkipAhead())
       }}
     />
     <Button title={"+ MAKE A NOTE"}
-            onPress={() => alert("+ MAKE A NOTE")}
+            onPress={() => props.navigation.navigate("NewNote")}
             width={"fill"}
             letterSpacing={4}
             fontSize={15}
             padding={11}
     />
   </View>
+
+const mapStateToProps = statePropsMapperFactory([PLAYBACK_STATE])
+const mapDispatchToProps = dispatchPropsMapperFactory([SET_PLAYBACK_STATE])
+
+export default connect(mapStateToProps, mapDispatchToProps)(Player)

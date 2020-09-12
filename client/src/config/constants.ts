@@ -25,3 +25,5 @@ const STORAGE_PREFIX = "@PodcastCompanion:"
 export const STORAGE_KEYS = {
   SPOTIFY_OAUTH: STORAGE_PREFIX + "SpotifyOAuthKey"
 }
+
+export const GRAPHQL_BASE_URL = "http://localhost:5000/podscribe/us-central1/graphql"

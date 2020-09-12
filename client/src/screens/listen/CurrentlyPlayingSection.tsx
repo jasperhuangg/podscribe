@@ -1,15 +1,15 @@
 import * as React from "react";
 import {SyncEvent} from "../../models/SyncEvent";
 import {Image, Text, View} from "react-native";
-import {playerStyles} from "./PlayerStyles";
+import {listenStyles} from "./ListenStyles";
 import {SCREEN_HEIGHT, SCREEN_WIDTH} from "../../util/Dimensions";
 import {global} from "../../shared/GlobalStyles";
 
 export function CurrentlyPlayingSection(props: {syncEvent: SyncEvent}) {
   return (
-    <View style={[playerStyles.container_current, {marginBottom: SCREEN_HEIGHT * 0.02}]}>
+    <View style={[listenStyles.container_current, {marginBottom: SCREEN_HEIGHT * 0.02}]}>
       <View style={[
-        playerStyles.container_image,
+        listenStyles.container_image,
         {marginBottom: SCREEN_HEIGHT * 0.04}
         ]}>
         <Image
@@ -26,7 +26,7 @@ export function CurrentlyPlayingSection(props: {syncEvent: SyncEvent}) {
       <Text
         style={[
           global.text_black,
-          playerStyles.episodeTitleText,
+          listenStyles.episodeTitleText,
           {fontSize: Math.round(SCREEN_WIDTH * 0.05)}
         ]}
         numberOfLines={2}
@@ -36,7 +36,7 @@ export function CurrentlyPlayingSection(props: {syncEvent: SyncEvent}) {
       <Text
         style={[
           global.text_black,
-          playerStyles.showNameText,
+          listenStyles.showNameText,
           {fontSize: Math.round(SCREEN_WIDTH * 0.05) - 5}
         ]}>
         {props.syncEvent.show}

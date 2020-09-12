@@ -1,11 +1,10 @@
 import * as React from "react"
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import Notebooks from "./notebooks/Collections";
-import MainPlayer from "./listen/MainPlayer";
 import {colors} from "../config/colors";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {StatusBar} from "react-native";
-import {ListenStack} from "./listen/ListenStack";
+import {Stack} from "./listen/Stack";
 
 const Tab = createBottomTabNavigator()
 
@@ -47,7 +46,7 @@ export default (props: any) =>
 
       <Tab.Screen
         name={"Listen"}
-        component={ListenStack}
+        component={Stack}
         options={{
           tabBarLabel: "",
           tabBarIcon: ({color, size}) => (

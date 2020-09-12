@@ -10,14 +10,26 @@ export class SyncEvent {
               readonly isPlaying: boolean,
               readonly length: number
 ) {}
-  cloneTogglePlayback(): SyncEvent {
+  cloneTogglePlay(): SyncEvent {
     return new SyncEvent(
       this.id,
       this.title,
       this.show,
       this.imageUrl,
       this.progress,
-      !this.isPlaying,
+      true,
+      this.length
+    )
+  }
+
+  cloneTogglePause(): SyncEvent {
+    return new SyncEvent(
+      this.id,
+      this.title,
+      this.show,
+      this.imageUrl,
+      this.progress,
+      false,
       this.length
     )
   }

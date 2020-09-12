@@ -1,6 +1,6 @@
 import {StyleSheet} from "react-native";
 
-export const playerStyles = StyleSheet.create({
+export const listenStyles = StyleSheet.create({
   container_current: {
   },
 

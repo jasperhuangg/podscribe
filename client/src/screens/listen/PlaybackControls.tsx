@@ -1,5 +1,5 @@
 import {TouchableOpacity, View} from "react-native";
-import {playerStyles} from "./PlayerStyles";
+import {listenStyles} from "./ListenStyles";
 import {SCREEN_HEIGHT, SCREEN_WIDTH} from "../../util/Dimensions";
 import {FontAwesome, FontAwesome5, MaterialCommunityIcons} from "@expo/vector-icons";
 import {colors} from "../../config/colors";
@@ -13,7 +13,7 @@ export const PlaybackControls = (props: {
   onSkipAhead: () => void,
   onSkipBack: () => void
 }) =>
-  <View style={[playerStyles.container_playback_controls, {
+  <View style={[listenStyles.container_playback_controls, {
     paddingTop: SCREEN_HEIGHT * 0.04,
     paddingBottom: SCREEN_HEIGHT * 0.04,
   }]}>

@@ -2,11 +2,11 @@ import React from 'react'
 import {
   createStackNavigator,
 } from "@react-navigation/stack"
-import MainPlayer from "./MainPlayer";
-import {NewNote} from "./NewNote";
+import NewNote from "./NewNote";
 import * as Haptics from "expo-haptics";
+import Listen from "./Listen";
 
-export const ListenStack = (props: any) => {
+export const Stack = (props: any) => {
   const Stack = createStackNavigator()
 
   React.useEffect(() => {
@@ -19,14 +19,20 @@ export const ListenStack = (props: any) => {
 
   return (
     <Stack.Navigator
-      initialRouteName={"Player"}
+      initialRouteName={"Listen"}
       screenOptions={{
         headerShown: false,
       }}
       mode={'modal'}
     >
-      <Stack.Screen name={"Player"} component={MainPlayer} />
-      <Stack.Screen name={"NewNote"} component={NewNote} />
+      <Stack.Screen
+        name={"Listen"}
+        component={Listen}
+      />
+      <Stack.Screen
+        name={"NewNote"}
+        component={NewNote}
+      />
 
     </Stack.Navigator>
   )

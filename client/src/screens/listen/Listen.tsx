@@ -5,33 +5,32 @@ import {
   AppStateStatus,
   SafeAreaView,
 } from "react-native"
-import {statePropsMapperFactory} from "../../util/redux";
+import {dispatchPropsMapperFactory, statePropsMapperFactory} from "../../util/redux";
 import {AUTH_STATE} from "../../util/redux/auth/types";
 import {connect} from "react-redux";
 import {global} from "../../shared/GlobalStyles";
 import {SpotifySyncPlayback} from "../../util/SpotifySyncPlayback";
 import {SyncEvent} from "../../models/SyncEvent";
 import {NoPlaybackPrompt} from "./NoPlaybackPrompt";
-import {PlayerWithPlayback} from "./PlayerWithPlayback";
+import Player from "./Player";
+import {PLAYBACK_STATE, SET_PLAYBACK_STATE} from "../../util/redux/playback/types";
 
 
 const SYNC_INTERVAL_MS = 20000
 
-type CreateState = {
+type ListenState = {
   loaded: boolean
-  syncEvent: SyncEvent|null
   interval: NodeJS.Timeout|null
   onBlur: any
   appState: string
 }
 
-class MainPlayer extends React.Component<any, CreateState> {
+class Listen extends React.Component<any, ListenState> {
 
   constructor(props: any) {
     super(props)
     this.state = {
       loaded: false,
-      syncEvent: null,
       interval: null,
       onBlur: null,
       appState: "active",
@@ -48,29 +47,29 @@ class MainPlayer extends React.Component<any, CreateState> {
     })
 
     this.props.navigation.addListener('blur', () => {
-      console.log(">>>> Create blur event")
+      console.log(">>>> Listen blur event")
       clearTimeout(this.state.interval!)
     })
   }
 
-  shouldComponentUpdate(nextProps: Readonly<any>, nextState: Readonly<CreateState>): boolean {
-    const currSync = this.state.syncEvent
-    const nextSync = nextState.syncEvent
-
-    return (
-      (!this.state.loaded && nextState.loaded) ||
-      (!currSync && !!nextSync) ||
-      (!!currSync && !nextSync) ||
-      (!!currSync && !!nextSync && (
-          currSync.id !== nextSync.id ||                // podcast changed
-          currSync.isPlaying !== nextSync.isPlaying ||  // playback status changed
-          currSync.progress !== nextSync.progress       // progress changed
-      ))
-    )
-  }
+  // shouldComponentUpdate(nextProps: Readonly<any>, nextState: Readonly<ListenState>): boolean {
+  //   const currSync = this.state.syncEvent
+  //   const nextSync = nextState.syncEvent
+  //
+  //   return (
+  //     (!this.state.loaded && nextState.loaded) ||
+  //     (!currSync && !!nextSync) ||
+  //     (!!currSync && !nextSync) ||
+  //     (!!currSync && !!nextSync && (
+  //         currSync.id !== nextSync.id ||                // podcast changed
+  //         currSync.isPlaying !== nextSync.isPlaying ||  // playback status changed
+  //         currSync.progress !== nextSync.progress       // progress changed
+  //     ))
+  //   )
+  // }
 
   componentWillUnmount() {
-    console.log(">>>> Create componentWillUnmount")
+    console.log(">>>> Listen componentWillUnmount")
     clearTimeout(this.state.interval!)
     AppState.removeEventListener("change", this._handleAppStateChange)
   }
@@ -80,11 +79,10 @@ class MainPlayer extends React.Component<any, CreateState> {
     return (
       <SafeAreaView style={global.container_centered}>
         {this.state.loaded ?
-          (this.state.syncEvent ?
-            <PlayerWithPlayback
-              syncEvent={this.state.syncEvent}
+          (this.props.syncEvent ?
+            <Player
               accessToken={this.props.tokens.accessToken}
-              setSyncEvent={(syncEvent => this.setState({syncEvent: syncEvent}))}
+              navigation={this.props.navigation}
             /> :
             <NoPlaybackPrompt/>
           ) :
@@ -100,12 +98,28 @@ class MainPlayer extends React.Component<any, CreateState> {
     //       handle case where access token expires (need to refresh and reset access token)
     const response = await SpotifySyncPlayback.get(this.props.tokens.accessToken)
 
-    console.log(">>>> Create.getPlayback", response)
+    console.log(">>>> Listen.getPlayback", response)
 
     this.setState({
       loaded: true,
-      syncEvent: response
     })
+
+    this.updatePlayback(response)
+  }
+
+  updatePlayback(nextSync: SyncEvent | null) {
+    const currSync = this.props.syncEvent
+
+    if(
+      (!currSync && !!nextSync) ||
+      (!!currSync && !nextSync) ||
+      (!!currSync && !!nextSync && (
+        currSync.id !== nextSync.id ||                // podcast changed
+        currSync.isPlaying !== nextSync.isPlaying ||  // playback status changed
+        currSync.progress !== nextSync.progress       // progress changed
+      ))
+    )
+      this.props.setPlaybackState(nextSync)
   }
 
    _handleAppStateChange = async (nextAppState: AppStateStatus) => {
@@ -119,6 +133,7 @@ class MainPlayer extends React.Component<any, CreateState> {
   };
 }
 
-const mapStateToProps = statePropsMapperFactory([AUTH_STATE])
+const mapStateToProps = statePropsMapperFactory([AUTH_STATE, PLAYBACK_STATE])
+const mapDispatchToProps = dispatchPropsMapperFactory([SET_PLAYBACK_STATE])
 
-export default connect(mapStateToProps)(MainPlayer)
+export default connect(mapStateToProps, mapDispatchToProps)(Listen)

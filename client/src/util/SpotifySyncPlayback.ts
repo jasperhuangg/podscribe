@@ -49,7 +49,7 @@ export class SpotifySyncPlayback {
           )
           .then(response =>
             console.log(
-              ">>>> SpotifySyncPlayback.skip30",
+              "++++ SpotifySyncPlayback.skip30",
               forward ? "forward" : "backward",
               response.data
             )
@@ -61,15 +61,40 @@ export class SpotifySyncPlayback {
 
   static pause(accessToken: string) {
     const headers = {Authorization: "Bearer " + accessToken}
-
-    axios.put(SPOTIFY_API_URLS.pausePlayback, {},{headers: headers})
-      .then(response => console.log("SpotifySyncPlayback.pause", response.data))
+    return axios.put(SPOTIFY_API_URLS.pausePlayback, {},{headers: headers})
   }
 
-  static play(accessToken: string) {
+  // TODO: instead of just resuming playback, use stored spotify_uri/timestamp for podcast to resume playback
+  static play(accessToken: string, lastSeenPlaybackId: string) {
+
+    console.log(">>>>", lastSeenPlaybackId)
+
+    const headers = {Authorization: "Bearer " + accessToken}
+    const body = {
+      uris: ["spotify:episode:" + lastSeenPlaybackId]
+    }
+
+    return axios.put(SPOTIFY_API_URLS.resumePlayback, {},{headers: headers})
+      .catch(_ => {
+        console.log("Spotify Playback error, trying with spotify_uri")
+        axios.put(SPOTIFY_API_URLS.resumePlayback, body,{headers: headers})
+      })
+  }
+
+  static pauseAtPosition(accessToken: string) {
     const headers = {Authorization: "Bearer " + accessToken}
 
-    axios.put(SPOTIFY_API_URLS.resumePlayback, {},{headers: headers})
-      .then(response => console.log("SpotifySyncPlayback.play", response.data))
+
+  }
+
+  static playAtPosition(accessToken: string, episodeUri: string, ms: number) {
+    const headers = {Authorization: "Bearer " + accessToken}
+    const body = {
+      uris: [episodeUri],
+      position_ms: ms
+    }
+
+    axios.put(SPOTIFY_API_URLS.resumePlayback, body, {headers: headers})
+      .then(response => console.log("++++ SpotifySyncPlayback.playAtPosition", response.data))
   }
 }

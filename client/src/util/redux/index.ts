@@ -11,10 +11,15 @@ import {loginUser, logoutUser} from "./auth/actions";
 import {appReducer} from "./app/reducers";
 import {APP_STATE, SET_APP_VISIBILITY} from "./app/types";
 import {setAppVisibility} from "./app/actions";
+import {playbackReducer} from "./playback/reducers";
+import {PLAYBACK_STATE, SET_PLAYBACK_STATE} from "./playback/types";
+import {SyncEvent} from "../../models/SyncEvent";
+import {setPlaybackState} from "./playback/actions";
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  app: appReducer
+  app: appReducer,
+  playback: playbackReducer
 })
 
 export const store = createStore(
@@ -31,6 +36,9 @@ export const statePropsMapperFactory = (fields: string[]) =>
       ...(fields.includes(APP_STATE) ?
           {visible: state.app.visible} :
           {}),
+      ...(fields.includes(PLAYBACK_STATE) ?
+          {syncEvent: state.playback.syncEvent} :
+          {}),
     }
   }
 
@@ -46,7 +54,11 @@ export const dispatchPropsMapperFactory = (actions: string[]) =>
         }:
         {}),
       ...(actions.includes(SET_APP_VISIBILITY) ?
-        {setAppVisibility: (visible: boolean) => {dispatch(setAppVisibility(visible));}
+        {setAppVisibility: (visible: boolean) => {dispatch(setAppVisibility(visible))}
+        }:
+        {}),
+      ...(actions.includes(SET_PLAYBACK_STATE) ?
+        {setPlaybackState: (syncEvent: SyncEvent) => {dispatch(setPlaybackState(syncEvent))}
         }:
         {}),
     }
