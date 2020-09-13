@@ -1,9 +1,7 @@
 export class Note {
   timestamp: number
-  content: string
 
-  constructor(readonly id: string, timestamp: number, content: string) {
+  constructor(readonly id: string|null, timestamp: number) {
     this.timestamp = timestamp
-    this.content = content
   }
 }

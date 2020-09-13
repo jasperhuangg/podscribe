@@ -89,8 +89,9 @@ export class SpotifySyncPlayback {
 
     return axios.put(SPOTIFY_API_URLS.resumePlayback(null), {},{headers: headers})
       .catch(e => {
-        console.log(">>>> Spotify resume playback error, trying with spotify_uri...", e)
+        console.log(">>>> Spotify resume playback error, trying with uri/device_id...", e)
           return axios.put(SPOTIFY_API_URLS.resumePlayback(syncEvent.deviceId), resumePlaybackBody,{headers: headers})
+            .then(_ => console.log(">>>> Successfully resumed playback with uri/device_id", syncEvent.id, syncEvent.deviceId))
             .catch(e => console.error(e))
           })
   }

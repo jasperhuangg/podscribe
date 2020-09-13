@@ -5,7 +5,7 @@ import {NavigationContainer} from "@react-navigation/native"
 import {createStackNavigator} from "@react-navigation/stack"
 import Splash from "./src/screens/splash/Splash"
 import Login from "./src/screens/login/Login"
-import Main from "./src/screens/Main";
+import MainTabs from "./src/screens/MainTabs";
 
 export default function App() {
 
@@ -46,7 +46,7 @@ export default function App() {
             />
             <Stack.Screen
               name="Main"
-              component={Main}
+              component={MainTabs}
             />
           </Stack.Navigator>
         </NavigationContainer>

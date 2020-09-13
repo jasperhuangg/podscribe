@@ -1,6 +1,6 @@
 import {SafeAreaView, Text, View} from "react-native";
-import {global} from "../../shared/GlobalStyles";
-import {SCREEN_HEIGHT} from "../../util/Dimensions";
+import {global} from "../../../shared/GlobalStyles";
+import {SCREEN_HEIGHT} from "../../../util/Dimensions";
 import * as React from "react";
 
 

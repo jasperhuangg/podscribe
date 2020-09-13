@@ -4,7 +4,7 @@ import Notebooks from "./notebooks/Collections";
 import {colors} from "../config/colors";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {StatusBar} from "react-native";
-import {Stack} from "./listen/Stack";
+import Listen from "./listen/Listen";
 
 const Tab = createBottomTabNavigator()
 
@@ -19,7 +19,6 @@ export default (props: any) =>
         activeBackgroundColor: colors.black,
         activeTintColor: "white",
         inactiveTintColor: colors.black,
-        keyboardHidesTabBar: true,
         tabStyle: {
           display: "flex",
           justifyContent: "center",
@@ -46,7 +45,7 @@ export default (props: any) =>
 
       <Tab.Screen
         name={"Listen"}
-        component={Stack}
+        component={Listen}
         options={{
           tabBarLabel: "",
           tabBarIcon: ({color, size}) => (

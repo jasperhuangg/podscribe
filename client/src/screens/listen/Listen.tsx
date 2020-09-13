@@ -11,10 +11,11 @@ import {connect} from "react-redux";
 import {global} from "../../shared/GlobalStyles";
 import {SpotifySyncPlayback} from "../../util/SpotifySyncPlayback";
 import {SyncEvent} from "../../models/SyncEvent";
-import {NoPlaybackPrompt} from "./NoPlaybackPrompt";
+import {NoPlaybackPrompt} from "./prompts/NoPlaybackPrompt";
 import Player from "./Player";
 import {PLAYBACK_STATE, SET_PLAYBACK_STATE} from "../../util/redux/playback/types";
-import NewNote from "./NewNote"
+import NewNote from "../editor/NewNote"
+import * as Haptics from "expo-haptics";
 
 
 const SYNC_INTERVAL_MS = 20000
@@ -43,6 +44,10 @@ const Listen = (props: any) => {
 
     AppState.addEventListener("change", _handleAppStateChange);
 
+    const tabPressListener = props.navigation.addListener('tabPress', async () => {
+      await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+    });
+
     props.navigation.addListener('focus', async () => {
       console.log(">>>> Listen focus event")
       await getPlayback()
@@ -59,6 +64,7 @@ const Listen = (props: any) => {
       console.log(">>>> Listen unmounting")
       clearTimeout(syncInterval!)
       AppState.removeEventListener("change", _handleAppStateChange)
+      tabPressListener()
     }
   }, [])
 

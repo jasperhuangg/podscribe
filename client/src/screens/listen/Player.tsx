@@ -11,6 +11,7 @@ import * as Progress from "react-native-progress";
 import {dispatchPropsMapperFactory, statePropsMapperFactory} from "../../util/redux";
 import {PLAYBACK_STATE, SET_PLAYBACK_STATE} from "../../util/redux/playback/types";
 import {connect} from "react-redux";
+import {AUTH_STATE} from "../../util/redux/auth/types";
 
 const Player = (props: any) =>
   <View style={global.container_inner_80}>
@@ -46,7 +47,17 @@ const Player = (props: any) =>
       }}
     />
     <Button title={"+ MAKE A NOTE"}
-            onPress={() => props.showModal()}
+            onPress={() => {
+              // TODO: need to update syncEvent to current timestamp here
+              if (props.syncEvent.isPlaying)
+                SpotifySyncPlayback.pause(props.tokens.accessToken)
+                  .then(_ => {
+                    props.setPlaybackState(props.syncEvent.cloneTogglePause())
+                    props.showModal()
+                  })
+              else
+                props.showModal()
+            }}
             width={"fill"}
             letterSpacing={4}
             fontSize={15}
@@ -54,7 +65,7 @@ const Player = (props: any) =>
     />
   </View>
 
-const mapStateToProps = statePropsMapperFactory([PLAYBACK_STATE])
+const mapStateToProps = statePropsMapperFactory([PLAYBACK_STATE, AUTH_STATE])
 const mapDispatchToProps = dispatchPropsMapperFactory([SET_PLAYBACK_STATE])
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player)

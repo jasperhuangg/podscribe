@@ -1,7 +1,7 @@
 import {Text, View} from "react-native";
-import {SCREEN_HEIGHT} from "../../util/Dimensions";
-import {global} from "../../shared/GlobalStyles";
-import Button from "../../shared/Button";
+import {SCREEN_HEIGHT} from "../../../util/Dimensions";
+import {global} from "../../../shared/GlobalStyles";
+import Button from "../../../shared/Button";
 import * as Linking from "expo-linking";
 import * as React from "react";
 
