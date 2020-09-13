@@ -19,7 +19,6 @@ import * as Haptics from "expo-haptics";
 import {useSpring} from "react-spring/native";
 import {animated} from "react-spring";
 
-const AnimatedSafeAreaView = animated(SafeAreaView)
 const SYNC_INTERVAL_MS = 30000
 
 const Listen = (props: any) => {
@@ -30,21 +29,6 @@ const Listen = (props: any) => {
   const [modalShowing, setModalShowing] = React.useState(false)
 
 
-  const fadeRiseInProps = useSpring({
-    translateY: 0,
-    opacity: 1,
-    from: {
-      translateY: 200,
-      opacity: 0
-    }
-  })
-
-  const fadeInRiseStyle = {
-    transform: [{
-      translateY: fadeRiseInProps.translateY
-    }],
-    opacity: fadeRiseInProps.opacity
-  }
 
   React.useEffect(() => {
 
@@ -87,10 +71,9 @@ const Listen = (props: any) => {
 
 
   return (
-    <AnimatedSafeAreaView
+    <SafeAreaView
       style={[
         global.container_centered,
-        fadeInRiseStyle
       ]}
     >
       <NewNote
@@ -109,7 +92,7 @@ const Listen = (props: any) => {
         ) :
         <ActivityIndicator size={"small"}/>
       }
-    </AnimatedSafeAreaView>
+    </SafeAreaView>
   )
 
 

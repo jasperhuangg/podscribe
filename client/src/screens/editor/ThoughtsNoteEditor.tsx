@@ -17,10 +17,13 @@ export const ThoughtsNoteEditor = (
   }) => {
 
   const growInProps = useSpring({
+    config: {
+      duration: 200
+    },
     scale: 1,
     opacity: 1,
     from: {
-      scale: 0.6,
+      scale: 0.5,
       opacity: 0
     }
   })
