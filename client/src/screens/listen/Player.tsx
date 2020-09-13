@@ -46,7 +46,7 @@ const Player = (props: any) =>
       }}
     />
     <Button title={"+ MAKE A NOTE"}
-            onPress={() => props.navigation.navigate("NewNote")}
+            onPress={() => props.showModal()}
             width={"fill"}
             letterSpacing={4}
             fontSize={15}

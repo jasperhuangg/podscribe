@@ -7,14 +7,35 @@ import {
   statePropsMapperFactory
 } from "../../util/redux";
 import {AUTH_STATE, LOGIN_USER, LOGOUT_USER} from "../../util/redux/auth/types";
+import {SpotifyAuthenticationHandler} from "../../util/SpotifyAuthenticationHandler";
+import {TokenResponse} from "expo-app-auth/build/AppAuth.types";
 
 function Splash(props: any) {
 
-  // ---- Navigate to Login after 1500ms
   React.useEffect(() => {
-    setTimeout(() => {
-      props.navigation.replace("Login")
-    }, 1500 )
+    // ---- Try to use the refresh token in AsyncStorage
+    SpotifyAuthenticationHandler.getCachedAuthAsync()
+      .then((authState: TokenResponse|null) => {
+        if (!authState) {
+          // ---- Navigate to Login after 1500ms
+          setTimeout(() => {
+            props.navigation.replace("Login")
+          }, 1500 )
+        }
+        else {
+          const refreshToken = authState.refreshToken
+          // ---- TODO: handle if refresh token fails
+          if (refreshToken) {
+            SpotifyAuthenticationHandler.refreshAuthAsync(refreshToken)
+              .then((_authState) => {
+                props.loginUser(_authState)
+                props.navigation.replace("Main")
+              })
+          }
+        }
+      })
+
+
   }, [])
 
   return (

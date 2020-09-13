@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {SafeAreaView, Text, TouchableOpacity, View} from "react-native";
+import {Button, SafeAreaView, Text, TouchableOpacity, View} from "react-native";
 import {dispatchPropsMapperFactory, statePropsMapperFactory} from "../../util/redux";
 import {AUTH_STATE} from "../../util/redux/auth/types";
 import {connect} from "react-redux";
@@ -9,6 +9,7 @@ import {PLAYBACK_STATE, SET_PLAYBACK_STATE} from "../../util/redux/playback/type
 import {SyncEvent} from "../../models/SyncEvent";
 import { Ionicons } from '@expo/vector-icons';
 import {colors} from "../../config/colors";
+import Modal from "react-native-modal";
 
 export enum NOTE_TYPES {
   DEFINITION,
@@ -22,6 +23,7 @@ const NewNote = (props: any) => {
   const [noteType, setNoteType] = React.useState<string|null>(null)
   const [currentPlayback, setCurrentPlayback] = React.useState<SyncEvent|null>(null)
 
+  // TODO: playing doesn't work after a certain amount of time
   // React.useEffect(() => {
   //   SpotifySyncPlayback.pause(props.tokens.accessToken)
   //     .then(_ => props.setPlaybackState(props.syncEvent.cloneTogglePause()))
@@ -34,28 +36,26 @@ const NewNote = (props: any) => {
   // }, [])
 
   return (
-    <SafeAreaView
-      style={newNoteStyles.container}
+    <Modal
+      isVisible={props.showing}
+      useNativeDriver={true}
     >
-      <TouchableOpacity
-        style={newNoteStyles.modalBar}
-        onPress={() => props.navigation.navigate("Listen")}
-      >
-        <Ionicons name="ios-arrow-down" size={30} color={colors.black} />
-      </TouchableOpacity>
-    {!noteType ?
-      <NoteTypeModal/> :
-      <NoteEditor type={noteType!}/>
-    }
-    </SafeAreaView>
+      <NoteTypeSelector />
+    </Modal>
   )
 }
 
-export const NoteTypeModal = (props: {}) =>
-  <View style={newNoteStyles.noteTypeModal}>
-    <Text>
-      Modal
-    </Text>
+export const NoteTypeSelector = (props: {}) =>
+  <View style={newNoteStyles.noteTypeSelector}>
+    <View>
+      <Text>Note</Text>
+    </View>
+    <View>
+      <Text>Definition</Text>
+    </View>
+    <View>
+      <Text>Image</Text>
+    </View>
   </View>
 
 export const NoteEditor = (props: {type: string}) =>

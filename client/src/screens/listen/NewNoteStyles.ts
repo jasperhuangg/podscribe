@@ -5,10 +5,14 @@ export const newNoteStyles = StyleSheet.create({
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5
   },
-  noteTypeModal: {
+  noteTypeSelector: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white"
+  },
+  selectorTab: {
+    height: 60,
   },
   modalBar: {
     width: "100%",

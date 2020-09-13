@@ -11,7 +11,8 @@ export function CurrentlyPlayingSection(props: {syncEvent: SyncEvent}) {
       <View style={[
         listenStyles.container_image,
         {marginBottom: SCREEN_HEIGHT * 0.04}
-        ]}>
+        ]}
+      >
         <Image
           source={{
             uri: props.syncEvent.imageUrl

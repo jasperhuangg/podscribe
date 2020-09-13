@@ -14,6 +14,7 @@ import {SyncEvent} from "../../models/SyncEvent";
 import {NoPlaybackPrompt} from "./NoPlaybackPrompt";
 import Player from "./Player";
 import {PLAYBACK_STATE, SET_PLAYBACK_STATE} from "../../util/redux/playback/types";
+import NewNote from "./NewNote"
 
 
 const SYNC_INTERVAL_MS = 20000
@@ -24,6 +25,7 @@ const Listen = (props: any) => {
   const [syncInterval, setSyncInterval] = React.useState<any>(null)
   const [onBlur, setOnBlur] = React.useState(null)
   const [appState, setAppState] = React.useState("active")
+  const [modalShowing, setModalShowing] = React.useState(false)
 
 
   React.useEffect(() => {
@@ -54,7 +56,7 @@ const Listen = (props: any) => {
     })
 
     return () => {
-      console.log(">>>> Listen componentWillUnmount")
+      console.log(">>>> Listen unmounting")
       clearTimeout(syncInterval!)
       AppState.removeEventListener("change", _handleAppStateChange)
     }
@@ -64,11 +66,16 @@ const Listen = (props: any) => {
 
   return (
     <SafeAreaView style={global.container_centered}>
+      <NewNote
+        hide={() => setModalShowing(false)}
+        showing={modalShowing}
+      />
       {loaded ?
         (props.syncEvent && props.syncEvent.deviceId ?
           <Player
             accessToken={props.tokens.accessToken}
             navigation={props.navigation}
+            showModal={() => setModalShowing(true)}
           /> :
           <NoPlaybackPrompt/>
         ) :

@@ -12,6 +12,8 @@ export const listenStyles = StyleSheet.create({
   },
 
   container_image: {
+    backgroundColor: "rgba(30, 30, 30, 0.3)",
+    borderRadius: 10,
     width: "100%",
     display: "flex",
     justifyContent: "center",
