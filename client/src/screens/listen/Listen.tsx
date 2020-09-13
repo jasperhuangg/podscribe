@@ -16,18 +16,35 @@ import Player from "./Player";
 import {PLAYBACK_STATE, SET_PLAYBACK_STATE} from "../../util/redux/playback/types";
 import NewNote from "../editor/NewNote"
 import * as Haptics from "expo-haptics";
+import {useSpring} from "react-spring/native";
+import {animated} from "react-spring";
 
-
-const SYNC_INTERVAL_MS = 20000
+const AnimatedSafeAreaView = animated(SafeAreaView)
+const SYNC_INTERVAL_MS = 30000
 
 const Listen = (props: any) => {
 
   const [loaded, setLoaded] = React.useState(false)
   const [syncInterval, setSyncInterval] = React.useState<any>(null)
-  const [onBlur, setOnBlur] = React.useState(null)
   const [appState, setAppState] = React.useState("active")
   const [modalShowing, setModalShowing] = React.useState(false)
 
+
+  const fadeRiseInProps = useSpring({
+    translateY: 0,
+    opacity: 1,
+    from: {
+      translateY: 200,
+      opacity: 0
+    }
+  })
+
+  const fadeInRiseStyle = {
+    transform: [{
+      translateY: fadeRiseInProps.translateY
+    }],
+    opacity: fadeRiseInProps.opacity
+  }
 
   React.useEffect(() => {
 
@@ -69,9 +86,13 @@ const Listen = (props: any) => {
   }, [])
 
 
-
   return (
-    <SafeAreaView style={global.container_centered}>
+    <AnimatedSafeAreaView
+      style={[
+        global.container_centered,
+        fadeInRiseStyle
+      ]}
+    >
       <NewNote
         hide={() => setModalShowing(false)}
         showing={modalShowing}
@@ -82,13 +103,15 @@ const Listen = (props: any) => {
             accessToken={props.tokens.accessToken}
             navigation={props.navigation}
             showModal={() => setModalShowing(true)}
+            getPlayback={getPlayback}
           /> :
           <NoPlaybackPrompt/>
         ) :
         <ActivityIndicator size={"small"}/>
       }
-    </SafeAreaView>
+    </AnimatedSafeAreaView>
   )
+
 
   async function getPlayback() {
     // TODO: rewrite this with then/catch,

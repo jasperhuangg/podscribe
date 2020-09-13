@@ -47,15 +47,16 @@ const Player = (props: any) =>
       }}
     />
     <Button title={"+ MAKE A NOTE"}
-            onPress={() => {
-              // TODO: need to update syncEvent to current timestamp here
-              if (props.syncEvent.isPlaying)
-                SpotifySyncPlayback.pause(props.tokens.accessToken)
-                  .then(_ => {
-                    props.setPlaybackState(props.syncEvent.cloneTogglePause())
-                    props.showModal()
-                  })
-              else
+            onPress={async () => {
+              // if (props.syncEvent.isPlaying)
+              //   SpotifySyncPlayback.pause(props.tokens.accessToken)
+              //     .then(async ()  => {
+              //       props.setPlaybackState(props.syncEvent.cloneTogglePause())
+              //       await props.getPlayback()
+              //       props.showModal()
+              //     })
+              // else
+                await props.getPlayback()
                 props.showModal()
             }}
             width={"fill"}

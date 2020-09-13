@@ -44,9 +44,29 @@ export const newNoteStyles = StyleSheet.create({
     marginBottom: 20
   },
   noteEditor: {
-    padding: 20,
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: "white",
+    padding: 40,
     borderRadius: 10,
-    height: "100%",
+  },
+  noteEditorTextArea: {
     width: "100%",
+    padding: 20,
+  },
+  noteEditorHeader: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    paddingRight: 20,
+    paddingTop: 20,
+    paddingLeft: 20,
+  },
+  newNoteTimestamp: {
+    marginRight: 20,
+    fontWeight: "900",
+    letterSpacing: 3,
   }
 })

@@ -58,7 +58,10 @@ function Login(props: any) {
             <Text
               style={[
                 global.text_xl,
-                global.text_black, {fontWeight: "900"},
+                global.text_black,
+                {
+                  fontWeight: "900"
+                },
               ]}>
               login.
             </Text>

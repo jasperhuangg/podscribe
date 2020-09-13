@@ -1,6 +1,6 @@
 import {Note} from "./Note";
 
-export class TextNote extends Note {
+export class ThoughtsNote extends Note {
 
   text: string
 
