@@ -22,8 +22,6 @@ const NewNote = (props: any) => {
     setTimeout(() => setNoteType(null), 300)
   }
 
-  console.log(props.syncEvent)
-
   return (
     <Modal
       isVisible={props.showing}
@@ -38,6 +36,7 @@ const NewNote = (props: any) => {
             <ThoughtsNoteEditor
               type={noteType}
               syncEvent={props.syncEvent}
+              hide={hideModal}
             />
         ):
         <NoteTypeSelector

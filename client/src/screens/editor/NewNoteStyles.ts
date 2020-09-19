@@ -1,5 +1,4 @@
 import {StyleSheet} from "react-native";
-import {global} from "../../shared/GlobalStyles";
 import {colors} from "../../config/colors";
 
 export const newNoteStyles = StyleSheet.create({
@@ -48,7 +47,7 @@ export const newNoteStyles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "white",
     padding: 40,
-    borderRadius: 10,
+    borderRadius: 18,
   },
   noteEditorTextArea: {
     width: "100%",
@@ -61,7 +60,7 @@ export const newNoteStyles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
     paddingRight: 20,
-    paddingTop: 20,
+    paddingTop: 10,
     paddingLeft: 20,
   },
   newNoteTimestamp: {

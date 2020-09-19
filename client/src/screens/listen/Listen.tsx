@@ -16,8 +16,7 @@ import Player from "./Player";
 import {PLAYBACK_STATE, SET_PLAYBACK_STATE} from "../../util/redux/playback/types";
 import NewNote from "../editor/NewNote"
 import * as Haptics from "expo-haptics";
-import {useSpring} from "react-spring/native";
-import {animated} from "react-spring";
+
 
 const SYNC_INTERVAL_MS = 30000
 
@@ -27,7 +26,6 @@ const Listen = (props: any) => {
   const [syncInterval, setSyncInterval] = React.useState<any>(null)
   const [appState, setAppState] = React.useState("active")
   const [modalShowing, setModalShowing] = React.useState(false)
-
 
 
   React.useEffect(() => {

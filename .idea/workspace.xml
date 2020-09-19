@@ -6,25 +6,44 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
     </expand>
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8975339e-70d7-4cfc-90b3-af3f8f3994ec" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/podcast_companion.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/functions/.eslintrc.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/functions/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/functions/podscribe-firebase-adminsdk-ri473-ba8a2c2bec.json" afterDir="false" />
+    <list default="true" id="f2e1dc28-27d6-4706-a32f-2db464657978" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/client/src/screens/profile/Profile.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/firebase/config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/graphql/resolvers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/graphql/typeDefs.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/tslint.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/podcast_companion.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/firebase.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/firebase.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/functions/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/server/functions/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/functions/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/functions/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/functions/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/functions/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/functions/src/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/functions/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/functions/tslint.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/screens/MainTabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/MainTabs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/screens/editor/NewNote.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/editor/NewNote.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/screens/editor/NewNoteStyles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/editor/NewNoteStyles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/screens/editor/ThoughtsNoteEditor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/editor/ThoughtsNoteEditor.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/screens/listen/Listen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/listen/Listen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/screens/login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/login/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/screens/splash/Splash.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/splash/Splash.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.firebaserc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/firebase.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/functions/.eslintrc.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/functions/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/functions/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/functions/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/functions/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/functions/podscribe-firebase-adminsdk-ri473-ba8a2c2bec.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,10 +53,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1h4UnyVvTglOiPFMInrpMK3PRKQ" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="1h9ySpLZdmlLDwPMuGqXrBBgeWk" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -46,43 +62,44 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/util/redux/app" />
-    <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/client/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/server/functions/src" />
-      <recent name="$PROJECT_DIR$/src/config" />
-      <recent name="$PROJECT_DIR$/src/shared" />
-      <recent name="$PROJECT_DIR$/src/util/redux/auth" />
-      <recent name="$PROJECT_DIR$/src/util/redux" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/util/redux/app" />
+      <recent name="$PROJECT_DIR$/server/graphql" />
+      <recent name="$PROJECT_DIR$/client/src/screens/profile" />
+      <recent name="$PROJECT_DIR$/client/src/screens/listen/prompts" />
+      <recent name="$PROJECT_DIR$/client/src/screens/editor" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="8975339e-70d7-4cfc-90b3-af3f8f3994ec" name="Default Changelist" comment="" />
-      <created>1599270031148</created>
+      <changelist id="f2e1dc28-27d6-4706-a32f-2db464657978" name="Default Changelist" comment="" />
+      <created>1599437606616</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1599270031148</updated>
-      <workItem from="1599270034207" duration="21000" />
-      <workItem from="1599270072379" duration="8997000" />
-      <workItem from="1599282831196" duration="5938000" />
-      <workItem from="1599290089908" duration="202000" />
-      <workItem from="1599295595021" duration="27395000" />
-      <workItem from="1599374685087" duration="6764000" />
-      <workItem from="1599389955572" duration="3928000" />
-      <workItem from="1599395324891" duration="2997000" />
-      <workItem from="1599400928724" duration="1462000" />
+      <updated>1599437606616</updated>
+      <workItem from="1599437609792" duration="4186000" />
+      <workItem from="1599450995080" duration="629000" />
+      <workItem from="1599451978524" duration="6000" />
+      <workItem from="1599482605669" duration="710000" />
+      <workItem from="1599569476297" duration="7518000" />
+      <workItem from="1599618329854" duration="148000" />
+      <workItem from="1599887244148" duration="13356000" />
+      <workItem from="1599974790469" duration="257000" />
+      <workItem from="1599975111447" duration="12888000" />
+      <workItem from="1600150875526" duration="1061000" />
+      <workItem from="1600351147426" duration="1634000" />
+      <workItem from="1600489641860" duration="1264000" />
+      <workItem from="1600491988240" duration="6723000" />
     </task>
     <servers />
   </component>
@@ -101,42 +118,61 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
   <component name="WindowStateProjectService">
-    <state x="397" y="256" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599378956029">
+    <state x="183" y="111" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599976749020">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="397" y="256" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1599378956029" />
-    <state x="532" y="172" key="#com.intellij.ide.util.MemberChooser" timestamp="1599367611066">
+    <state x="183" y="111" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1599976749020" />
+    <state x="393" y="256" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599890819599">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="532" y="172" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1599367611066" />
-    <state x="457" y="203" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1599396346937">
+    <state x="393" y="256" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1599890819599" />
+    <state x="457" y="203" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1600493398122">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="457" y="203" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.900@0.0.1440.900" timestamp="1599396346937" />
-    <state x="24" y="111" key="SettingsEditor" timestamp="1599400911611">
+    <state x="457" y="203" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.900@0.0.1440.900" timestamp="1600493398122" />
+    <state width="1394" height="244" key="GridCell.Tab.0.bottom" timestamp="1599979644370">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="24" y="111" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1599400911611" />
-    <state x="499" y="370" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599399719803">
+    <state width="1394" height="244" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1599979644370" />
+    <state width="1394" height="244" key="GridCell.Tab.0.center" timestamp="1599979644369">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="499" y="370" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1440.900@0.0.1440.900" timestamp="1599399719803" />
-    <state x="405" y="202" width="630" height="496" key="find.popup" timestamp="1599399436376">
+    <state width="1394" height="244" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1599979644369" />
+    <state width="1394" height="244" key="GridCell.Tab.0.left" timestamp="1599979644368">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="405" y="202" width="630" height="496" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1599399436376" />
-    <state x="384" y="209" key="run.anything.popup" timestamp="1599296646271">
+    <state width="1394" height="244" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1599979644368" />
+    <state width="1394" height="244" key="GridCell.Tab.0.right" timestamp="1599979644369">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="384" y="209" key="run.anything.popup/0.0.1440.900@0.0.1440.900" timestamp="1599296646271" />
-    <state x="383" y="194" width="672" height="678" key="search.everywhere.popup" timestamp="1599401371049">
+    <state width="1394" height="244" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1599979644369" />
+    <state x="307" y="191" key="IDE.errors.dialog" timestamp="1599615615947">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="307" y="191" key="IDE.errors.dialog/0.0.1440.900@0.0.1440.900" timestamp="1599615615947" />
+    <state x="258" y="100" key="SettingsEditor" timestamp="1600492241385">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="383" y="194" width="672" height="678" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1599394521223" />
-    <state x="383" y="194" width="672" height="678" key="search.everywhere.popup/0.23.1440.877@0.23.1440.877" timestamp="1599401371049" />
+    <state x="258" y="100" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1600492241385" />
+    <state x="499" y="370" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600491938090">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="499" y="370" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1440.900@0.0.1440.900" timestamp="1600491938090" />
+    <state x="405" y="195" width="832" height="510" key="find.popup" timestamp="1600503768413">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="405" y="195" width="832" height="510" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1600503768413" />
+    <state x="405" y="213" width="832" height="496" key="find.popup/0.23.1440.877@0.23.1440.877" timestamp="1599578525086" />
+    <state x="503" y="198" key="refactoring.ChangeSignatureDialog" timestamp="1599896917362">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="503" y="198" key="refactoring.ChangeSignatureDialog/0.0.1440.900@0.0.1440.900" timestamp="1599896917362" />
+    <state x="-1409" y="122" width="896" height="835" key="search.everywhere.popup" timestamp="1600151923754">
+      <screen x="-1920" y="-110" width="1920" height="1080" />
+    </state>
+    <state x="-1409" y="122" width="896" height="835" key="search.everywhere.popup/0.0.1440.900/-1920.-110.1920.1080@-1920.-110.1920.1080" timestamp="1600151923754" />
+    <state x="383" y="193" width="672" height="696" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1599999492529" />
+    <state x="383" y="211" width="672" height="678" key="search.everywhere.popup/0.23.1440.877@0.23.1440.877" timestamp="1599578497547" />
   </component>
 </project>

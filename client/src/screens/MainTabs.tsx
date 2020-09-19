@@ -3,8 +3,10 @@ import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import Notebooks from "./notebooks/Collections";
 import {colors} from "../config/colors";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { SimpleLineIcons } from '@expo/vector-icons';
 import {StatusBar} from "react-native";
 import Listen from "./listen/Listen";
+import Profile from "./profile/Profile";
 
 const Tab = createBottomTabNavigator()
 
@@ -50,6 +52,17 @@ export default (props: any) =>
           tabBarLabel: "",
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons name="podcast" size={size} color={color} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name={"Profile"}
+        component={Profile}
+        options={{
+          tabBarLabel: "",
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons name="settings" size={size} color={color} />
           ),
         }}
       />

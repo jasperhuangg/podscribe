@@ -41,11 +41,6 @@ function Login(props: any) {
     }
   }
 
-  const onLogout = async () => {
-    await SpotifyAuthenticationHandler.signOutAsync(props.tokens.accessToken!);
-    props.logoutUser()
-  }
-
   return (
     <View
       style={global.container_centered}

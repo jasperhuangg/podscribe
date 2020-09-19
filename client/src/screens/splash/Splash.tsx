@@ -16,6 +16,7 @@ function Splash(props: any) {
     // ---- Try to use the refresh token in AsyncStorage
     SpotifyAuthenticationHandler.getCachedAuthAsync()
       .then((authState: TokenResponse|null) => {
+        console.log(authState)
         if (!authState) {
           // ---- Navigate to Login after 1500ms
           setTimeout(() => {
