@@ -1,5 +1,8 @@
 import {OAuthBaseProps, OAuthProps} from "expo-app-auth";
 
+export const GRAPHQL_SERVER_BASE_URL =
+  "http://localhost:5000/graphql"
+
 export const SPOTIFY_AUTH_CONFIG: OAuthProps = {
   clientId: "2d68824f3adf435995d4b8262c68212b",
   issuer: "https://accounts.spotify.com",
@@ -7,6 +10,8 @@ export const SPOTIFY_AUTH_CONFIG: OAuthProps = {
   scopes: [
     'user-read-playback-state',
     'user-modify-playback-state',
+    'user-read-private',
+    'user-read-email'
   ],
   serviceConfiguration: {
     authorizationEndpoint: "https://accounts.spotify.com/authorize",
@@ -15,6 +20,7 @@ export const SPOTIFY_AUTH_CONFIG: OAuthProps = {
 }
 
 export const SPOTIFY_API_URLS = {
+  me: "https://api.spotify.com/v1/me",
   currentPlayback: "https://api.spotify.com/v1/me/player?additional_types=episode",
   seekPlayback: (ms: number) => "https://api.spotify.com/v1/me/player/seek?position_ms=" + ms,
   pausePlayback: "https://api.spotify.com/v1/me/player/pause",
@@ -29,5 +35,3 @@ const STORAGE_PREFIX = "@PodcastCompanion:"
 export const STORAGE_KEYS = {
   SPOTIFY_OAUTH: STORAGE_PREFIX + "SpotifyOAuthKey"
 }
-
-export const GRAPHQL_BASE_URL = "http://localhost:5000/podscribe/us-central1/graphql"

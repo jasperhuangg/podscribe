@@ -31,7 +31,7 @@ export const statePropsMapperFactory = (fields: string[]) =>
   (state: any) => {
     return {
       ...(fields.includes(AUTH_STATE) ?
-          {tokens: state.auth.tokens} :
+          {tokens: state.auth.tokens, uid: state.auth.uid} :
           {}),
       ...(fields.includes(APP_STATE) ?
           {visible: state.app.visible} :
@@ -46,7 +46,7 @@ export const dispatchPropsMapperFactory = (actions: string[]) =>
   (dispatch: any) => {
     return {
       ...(actions.includes(LOGIN_USER) ?
-        {loginUser: (tokens: TokenResponse) => {dispatch(loginUser(tokens))}
+        {loginUser: (fields: [string, TokenResponse]) => {dispatch(loginUser(fields))}
         }:
         {}),
       ...(actions.includes(LOGOUT_USER) ?

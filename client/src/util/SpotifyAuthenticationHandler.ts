@@ -1,7 +1,8 @@
 import * as AppAuth from 'expo-app-auth';
-import {SPOTIFY_AUTH_CONFIG, STORAGE_KEYS} from "../config/constants";
+import {SPOTIFY_API_URLS, SPOTIFY_AUTH_CONFIG, STORAGE_KEYS} from "../config/constants";
 import {TokenResponse} from "expo-app-auth";
 import AsyncStorage from "@react-native-community/async-storage";
+import axios from "axios"
 
 
 export class SpotifyAuthenticationHandler {
@@ -51,6 +52,13 @@ export class SpotifyAuthenticationHandler {
     } catch (e) {
       alert(`Failed to revoke token: ${e.message}`);
     }
+  }
+
+  static async getUser(accessToken: string) {
+    const headers = {Authorization: "Bearer " + accessToken}
+
+    const response = await axios.get(SPOTIFY_API_URLS.me, {headers: headers})
+    return response.data
   }
 }
 

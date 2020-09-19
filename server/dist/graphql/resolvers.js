@@ -13,6 +13,11 @@ exports.resolvers = void 0;
 const config_1 = require("../firebase/config");
 exports.resolvers = {
     Query: {
+        episode: (parent, args) => __awaiter(void 0, void 0, void 0, function* () {
+            const episodeSnapshot = yield config_1.firestoreEpisode(args.episode_id)
+                .get();
+            return config_1.dataWithID(episodeSnapshot);
+        }),
         episodes: (parent, args) => __awaiter(void 0, void 0, void 0, function* () {
             const episodesSnapshots = yield config_1.firestoreEpisodes()
                 .where("owner_id", "==", args.owner_id)

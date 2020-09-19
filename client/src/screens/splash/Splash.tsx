@@ -1,5 +1,5 @@
 import * as React from "react"
-import {View, Text, StatusBar} from "react-native";
+import {View, Text, StatusBar, AsyncStorage} from "react-native";
 import {connect} from "react-redux";
 import {global} from "../../shared/GlobalStyles";
 import {
@@ -28,8 +28,9 @@ function Splash(props: any) {
           // ---- TODO: handle if refresh token fails
           if (refreshToken) {
             SpotifyAuthenticationHandler.refreshAuthAsync(refreshToken)
-              .then((_authState) => {
-                props.loginUser(_authState)
+              .then(async (_authState) => {
+                const user = await SpotifyAuthenticationHandler.getUser(_authState.accessToken!)
+                props.loginUser([user.uri, _authState])
                 props.navigation.replace("Main")
               })
           }

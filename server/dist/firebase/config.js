@@ -19,7 +19,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.firestoreEpisodeNotes = exports.firestoreEpisodes = exports.dataWithID = void 0;
+exports.dataWithID = exports.firestoreEpisodeNotes = exports.firestoreEpisode = exports.firestoreEpisodes = void 0;
 const firebase = __importStar(require("firebase/app"));
 require("firebase/firestore");
 // ----------------------------------------------------------------------------------
@@ -34,12 +34,13 @@ const firebaseConfig = {
     appId: "1:186863284274:web:4c47c698abffcd5920cc2b"
 };
 firebase.initializeApp(firebaseConfig);
-function dataWithID(snapshot) {
-    return Object.assign(Object.assign({}, snapshot.data()), { id: snapshot.id });
-}
-exports.dataWithID = dataWithID;
 // ----------------------------------------------------------------------------------
 // ---- Reference shortcuts
-exports.firestoreEpisodes = () => firebase.firestore().collection("episodes");
-exports.firestoreEpisodeNotes = (episodeID) => exports.firestoreEpisodes().doc(episodeID).collection("notes");
+const firestore = firebase.firestore();
+exports.firestoreEpisodes = () => firestore.collection("episodes");
+exports.firestoreEpisode = (episodeID) => exports.firestoreEpisodes().doc(episodeID);
+exports.firestoreEpisodeNotes = (episodeID) => exports.firestoreEpisode(episodeID).collection("notes");
+// ----------------------------------------------------------------------------------
+// ---- Utility
+exports.dataWithID = (snapshot) => snapshot.exists ? Object.assign({ id: snapshot.id }, snapshot.data()) : null;
 //# sourceMappingURL=config.js.map

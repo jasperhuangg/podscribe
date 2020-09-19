@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "prestart": "npm run build",
+    "prestart": "yarn build",
     "start": "nodemon .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

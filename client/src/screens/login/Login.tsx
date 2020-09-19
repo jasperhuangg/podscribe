@@ -36,7 +36,8 @@ function Login(props: any) {
 
     if (!_authState) setIsLoggingIn(false)
     else {
-      props.loginUser(_authState)
+      const user = await SpotifyAuthenticationHandler.getUser(_authState.accessToken!)
+      props.loginUser([user.uri, _authState])
       props.navigation.replace("Main")
     }
   }

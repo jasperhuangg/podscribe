@@ -3,6 +3,8 @@ import "firebase/firestore";
 import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
 import QueryDocumentSnapshot = firebase.firestore.QueryDocumentSnapshot;
 
+export type ID = string
+
 // ----------------------------------------------------------------------------------
 // ---- Firebase init
 const firebaseConfig = {
@@ -17,23 +19,28 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 // ----------------------------------------------------------------------------------
-// ---- Utility
-
-export type ID = string
-
-export function dataWithID(snapshot: DocumentSnapshot|QueryDocumentSnapshot) {
-  return {
-    ...snapshot.data(),
-    id: snapshot.id
-  }
-}
-
-// ----------------------------------------------------------------------------------
 // ---- Reference shortcuts
 
+const firestore = firebase.firestore()
+
 export const firestoreEpisodes = () =>
-  firebase.firestore().collection("episodes")
+  firestore.collection("episodes")
+
+export const firestoreEpisode = (episodeID: ID) =>
+  firestoreEpisodes().doc(episodeID)
 
 export const firestoreEpisodeNotes = (episodeID: ID) =>
-  firestoreEpisodes().doc(episodeID).collection("notes")
+  firestoreEpisode(episodeID).collection("notes")
+
+// ----------------------------------------------------------------------------------
+// ---- Utility
+
+export const dataWithID = (snapshot: DocumentSnapshot|QueryDocumentSnapshot) =>
+  snapshot.exists ?
+    {
+      id: snapshot.id,
+      ...snapshot.data()
+    }
+    : null
+
 
