@@ -6,44 +6,14 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
     </expand>
     <select />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2e1dc28-27d6-4706-a32f-2db464657978" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/screens/profile/Profile.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/firebase/config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/graphql/resolvers.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/graphql/typeDefs.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/tslint.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/podcast_companion.iml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/screens/MainTabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/MainTabs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/screens/editor/NewNote.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/editor/NewNote.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/screens/editor/NewNoteStyles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/editor/NewNoteStyles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/screens/editor/ThoughtsNoteEditor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/editor/ThoughtsNoteEditor.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/screens/listen/Listen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/listen/Listen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/screens/login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/login/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/screens/splash/Splash.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/splash/Splash.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.firebaserc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/firebase.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/functions/.eslintrc.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/functions/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/functions/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/functions/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/functions/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/functions/podscribe-firebase-adminsdk-ri473-ba8a2c2bec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/client/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +69,7 @@
       <workItem from="1600150875526" duration="1061000" />
       <workItem from="1600351147426" duration="1634000" />
       <workItem from="1600489641860" duration="1264000" />
-      <workItem from="1600491988240" duration="6723000" />
+      <workItem from="1600491988240" duration="7015000" />
     </task>
     <servers />
   </component>
