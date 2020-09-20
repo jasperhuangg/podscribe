@@ -29,6 +29,8 @@ const Listen = (props: any) => {
 
 
   React.useEffect(() => {
+    getPlayback()
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
 
     const _handleAppStateChange = async (nextAppState: AppStateStatus) => {
       console.log("AppState changed", appState, nextAppState)
@@ -86,7 +88,7 @@ const Listen = (props: any) => {
             showModal={() => setModalShowing(true)}
             getPlayback={getPlayback}
           /> :
-          <NoPlaybackPrompt/>
+          <NoPlaybackPrompt getPlayback={getPlayback}/>
         ) :
         <ActivityIndicator size={"small"}/>
       }

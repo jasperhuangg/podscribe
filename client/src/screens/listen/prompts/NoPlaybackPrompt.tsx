@@ -6,9 +6,9 @@ import * as Linking from "expo-linking";
 import * as React from "react";
 import {animated} from "react-spring";
 import {useSpring} from "react-spring/native";
-import {fade} from "@material-ui/core";
 
-export const NoPlaybackPrompt= () => {
+
+export const NoPlaybackPrompt = (props: any) => {
   const AnimatedView = animated(View)
   const fadeRiseInProps = useSpring({
     translateY: 0,
@@ -32,6 +32,7 @@ export const NoPlaybackPrompt= () => {
         height: SCREEN_HEIGHT,
         display: "flex",
         justifyContent: "center",
+
       }
     ]}>
       <Text
@@ -46,11 +47,22 @@ export const NoPlaybackPrompt= () => {
       >
         no playback detected.
       </Text>
-      <Button title={"OPEN SPOTIFY"}
-              onPress={() => Linking.openURL('spotify://app')}
-              width={"fill"}
-              letterSpacing={4}
-      />
+      <View style={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
+        <Button title={"REFRESH"}
+                onPress={() => props.getPlayback()}
+                width={"fill"}
+                letterSpacing={4}
+        />
+        <View style={{padding: 20}}/>
+        <Button title={"OPEN SPOTIFY"}
+                onPress={() => Linking.openURL('spotify://app')}
+                width={"fill"}
+                letterSpacing={4}
+        />
+      </View>
+
+
+
     </AnimatedView>
   )
 }

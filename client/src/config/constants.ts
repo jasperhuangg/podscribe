@@ -1,12 +1,12 @@
 import {OAuthBaseProps, OAuthProps} from "expo-app-auth";
 
+export const SERVER_BASE_URL = "http://192.168.1.110:5000"
 export const GRAPHQL_SERVER_BASE_URL =
-  "http://localhost:5000/graphql"
+  `${SERVER_BASE_URL}/graphql`
 
 export const SPOTIFY_AUTH_CONFIG: OAuthProps = {
   clientId: "2d68824f3adf435995d4b8262c68212b",
   issuer: "https://accounts.spotify.com",
-  // clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
   scopes: [
     'user-read-playback-state',
     'user-modify-playback-state',

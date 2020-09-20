@@ -23,7 +23,7 @@ export class SpotifyAuthenticationHandler {
   static async getCachedAuthAsync() {
     let value = await AsyncStorage.getItem(STORAGE_KEYS.SPOTIFY_OAUTH);
     let authState: TokenResponse = JSON.parse(value!);
-    console.log('getCachedAuthAsync', authState);
+    // console.log('getCachedAuthAsync', authState);
     if (authState) {
       if (this.checkIfTokenExpired(authState.accessTokenExpirationDate!)) {
         return this.refreshAuthAsync(authState.refreshToken!);
@@ -36,7 +36,7 @@ export class SpotifyAuthenticationHandler {
 
   static async refreshAuthAsync(refreshToken: string) {
     let authState = await AppAuth.refreshAsync(SPOTIFY_AUTH_CONFIG, refreshToken);
-    console.log('refreshAuth', authState);
+    // console.log('refreshAuth', authState);
     await this.cacheAuthAsync(authState);
     return authState;
   }
